@@ -29,22 +29,17 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     width: "500px",
     backgroundColor: "#1C3F60",
-    borderRadius: "50px"
-  },
-  imgs: {
-    maxHeight: "100%",
-    maxWidth: "100%",
-    marginBottom: "-4px",
+    borderRadius: "50px",
   },
   links: {
     textDecoration: "none",
   },
 }));
 
-const AllCampusesView = (props) => {
+const AllStudentsView = (props) => {
   const classes = useStyles();
-  if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+  if (!props.allStudents.length) {
+    return <div>There are no students.</div>;
   }
   return (
     <div>
@@ -97,32 +92,25 @@ const AllCampusesView = (props) => {
           textAlign: "center",
           color: "#AFC1D0",
           backgroundColor: "#1C3F60",
-          marginTop: "0px"
+          marginTop: "0px",
         }}
       >
         Click on the names to view more information!
       </h1>
 
-      {props.allCampuses.map((campus) => (
-        <div key={campus.id} className={classes.data}>
-          <Link className={classes.links} to={`/campus/${campus.id}`}>
-            <h1 style={{ color: "#AFC1D0", margin: "10px" }}>{campus.name}</h1>
+      {props.allStudents.map((student) => (
+        <div key={student.id} className={classes.data}>
+          <Link className={classes.links} to={`/student/${student.id}`}>
+            <h1 style={{ color: "#AFC1D0"}}>{student.firstname + " " + student.lastname}</h1>
           </Link>
-          <img
-            src={campus.imgurl}
-            className={classes.imgs}
-            alt={campus.name + " campus"}
-          ></img>
         </div>
       ))}
-      <div style={{height: "50px"}}>
-      </div>
     </div>
   );
 };
 
-AllCampusesView.propTypes = {
-  allCampuses: PropTypes.array.isRequired,
+AllStudentsView.propTypes = {
+  allStudents: PropTypes.array.isRequired,
 };
 
-export default AllCampusesView;
+export default AllStudentsView;
