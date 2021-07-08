@@ -4,12 +4,12 @@ const db = require("../db");
 const Student = db.define("student", {
   firstname: {
     type: Sequelize.STRING,
-    validate: { allowNull: false, notEmpty: true },
+    allowNull: false,
   },
 
   lastname: {
     type: Sequelize.STRING,
-    validate: { allowNull: false, notEmpty: true },
+    allowNull: false,
   },
 
   email: {
@@ -21,7 +21,8 @@ const Student = db.define("student", {
     type: Sequelize.STRING,
     validate: {
       isUrl: true,
-      defaultValue: "https://img.icons8.com/material-rounded/48/000000/nothing-found.png",
+      defaultValue:
+        "https://img.icons8.com/material-rounded/48/000000/nothing-found.png",
     },
   },
 
