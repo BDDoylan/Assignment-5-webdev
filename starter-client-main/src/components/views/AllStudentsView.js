@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     width: "500px",
     backgroundColor: "#1C3F60",
     borderRadius: "50px",
+    padding: "1px",
   },
   links: {
     textDecoration: "none",
@@ -101,7 +102,9 @@ const AllStudentsView = (props) => {
       {props.allStudents.map((student) => (
         <div key={student.id} className={classes.data}>
           <Link className={classes.links} to={`/student/${student.id}`}>
-            <h1 style={{ color: "#AFC1D0"}}>{student.firstname + " " + student.lastname}</h1>
+            <h1 style={{ color: "#AFC1D0" }}>
+              {student.firstname + " " + student.lastname}
+            </h1>
           </Link>
         </div>
       ))}
