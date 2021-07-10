@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
     color: "#B1D4E0",
   },
   appBar: {
-    backgroundColor: "#0B1320",
+    backgroundColor: "#11153e",
     shadows: ["none"],
   },
   greeting: {
     display: "flex",
     justifyContent: "center",
-    backgroundColor: "#0B1320",
+    backgroundColor: "#11153e",
     borderRadius: "260px",
     width: "50%",
     height: "500px",

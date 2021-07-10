@@ -7,6 +7,10 @@ const Campus = db.define("campus", {
     allowNull: false,
   },
 
+  address: {
+    type: Sequelize.STRING,
+  },
+
   description: {
     type: Sequelize.STRING,
   },
@@ -17,11 +21,6 @@ const Campus = db.define("campus", {
       "https://img.icons8.com/material-rounded/48/000000/nothing-found.png",
     validate: {
       isUrl: true,
-    },
-
-    address: {
-      type: Sequelize.STRING,
-      validate: { allowNull: false, notEmpty: true },
     },
   },
 });
