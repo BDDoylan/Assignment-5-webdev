@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import AddingStudent from "./AddingStudent";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,15 +101,37 @@ const AllStudentsView = (props) => {
         Click on the names to view more information!
       </h1>
 
+      <AddingStudent />
+
       {props.allStudents.map((student) => (
         <div key={student.id} className={classes.data}>
           <Link className={classes.links} to={`/student/${student.id}`}>
-            <h1 style={{ color: "#AFC1D0" }}>
+            <h1 style={{ color: "#AFC1D0", display: "inline-block" }}>
               {student.firstname + " " + student.lastname}
             </h1>
           </Link>
+          <button
+            style={{
+              color: "#AFC1D0",
+              backgroundColor: "#1C3F60",
+              display: "inline-block",
+              fontSize: "30px",
+              float: "right",
+              borderRadius: "180px",
+              border: "1px solid #AFC1D0",
+            }}
+            onClick={function () {
+              axios.delete(`../api/students/${student.id}`).then((res) => {
+                console.log(res);
+              });
+              window.location.reload();
+            }}
+          >
+            X
+          </button>
         </div>
       ))}
+      <div style={{ height: "50px" }}></div>
     </div>
   );
 };

@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import AddingCampus from "./AddingCampus";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     width: "500px",
     backgroundColor: "#1C3F60",
-    borderRadius: "50px"
+    borderRadius: "50px",
   },
   imgs: {
     maxHeight: "100%",
@@ -42,10 +44,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AllCampusesView = (props) => {
+
   const classes = useStyles();
   if (!props.allCampuses.length) {
     return <div>There are no campuses.</div>;
   }
+
   return (
     <div>
       <AppBar position="static" elevation={0} className={classes.appBar}>
@@ -97,17 +101,47 @@ const AllCampusesView = (props) => {
           textAlign: "center",
           color: "#AFC1D0",
           backgroundColor: "#1C3F60",
-          marginTop: "0px"
+          marginTop: "0px",
         }}
       >
         Click on the names to view more information!
       </h1>
 
+      <AddingCampus />
+
       {props.allCampuses.map((campus) => (
         <div key={campus.id} className={classes.data}>
           <Link className={classes.links} to={`/campus/${campus.id}`}>
-            <h1 style={{ color: "#AFC1D0", margin: "10px" }}>{campus.name}</h1>
+            <h1
+              style={{
+                color: "#AFC1D0",
+                margin: "10px",
+                display: "inline-block",
+              }}
+            >
+              {campus.name + " - ID: " + campus.id}
+            </h1>
           </Link>
+          <button
+            style={{
+              color: "#AFC1D0",
+              backgroundColor: "#1C3F60",
+              display: "inline-block",
+              fontSize: "30px",
+              float: "right",
+              borderRadius: "180px",
+              border: "1px solid #AFC1D0",
+            }}
+            onClick={function(){
+              axios.delete(`../api/campuses/${campus.id}`).then((res) => {
+                console.log(res);
+              });
+              window.location.reload();
+            }}
+          >
+            X
+          </button>
+          <br></br>
           <img
             src={campus.imgurl}
             className={classes.imgs}
@@ -115,8 +149,8 @@ const AllCampusesView = (props) => {
           ></img>
         </div>
       ))}
-      <div style={{height: "50px"}}>
-      </div>
+
+      <div style={{ height: "50px" }}></div>
     </div>
   );
 };
